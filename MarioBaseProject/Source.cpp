@@ -11,6 +11,7 @@ SDL_Window* g_window = nullptr;
 //FunctionPrototypes
 bool InitSDL();
 void CloseSDL();
+bool Update();
 
 
 int main(int argc, char* args[])
@@ -18,16 +19,17 @@ int main(int argc, char* args[])
 	//check if sdl was setup correctly
 	if (InitSDL())
 	{
-		SDL_Delay(5000);
+		bool quit = false;
+		while (!quit)
+		{
+			quit = Update();
+		}
 	}
 
 	CloseSDL();
 	return 0;
 
 }
-
-
-
 
 bool InitSDL()
 {
@@ -66,4 +68,22 @@ void CloseSDL()
 	IMG_Quit();
 	SDL_Quit();
 
+}
+
+bool Update() 
+{
+	//Event Handler
+	SDL_Event e;
+
+	//Get Events
+	SDL_PollEvent(&e);
+
+	//Event Handle
+	switch (e.type) 
+	{
+	case SDL_QUIT:
+		return true;
+		break;
+	}
+	return false;
 }
