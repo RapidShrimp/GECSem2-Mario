@@ -13,7 +13,7 @@ private:
 	GameScreen* m_CurrentScreen;
 public:
 	GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen);
-	~GameScreenManager() {}
+	~GameScreenManager();
 
 	void Render();
 	void Update(float deltaTime,SDL_Event e);
