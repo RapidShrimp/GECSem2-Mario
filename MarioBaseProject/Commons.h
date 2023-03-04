@@ -17,7 +17,7 @@ struct Vector2D
 		x = Initial_X;
 		y = Initial_Y;
 	}
-public:
+};
 	enum SCREENS 
 	{
 		SCREEN_INTRO,
@@ -27,5 +27,4 @@ public:
 		SCREEN_GAMEOVER,
 		SCREEN_HIGHSCORES
 	};
-};
 

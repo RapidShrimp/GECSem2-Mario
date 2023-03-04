@@ -4,7 +4,6 @@
 
 GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer) 
 { 
-
 	SetupLevel(); 
 }
 
@@ -28,6 +27,7 @@ bool GameScreenLevel1::SetupLevel()
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
+
 }
 
 void GameScreenLevel1::Render()

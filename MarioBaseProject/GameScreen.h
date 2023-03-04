@@ -4,10 +4,12 @@
 #include <SDL.h>
 using namespace std;
 
-SDL_Renderer* m_renderer;
 
 class GameScreen
 {
+protected:
+SDL_Renderer* m_renderer;
+
 public:
 GameScreen(SDL_Renderer* renderer);
 ~GameScreen();
