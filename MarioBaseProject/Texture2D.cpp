@@ -45,9 +45,9 @@ bool Texture2D::LoadFromFile(std::string path)
 
 void Texture2D::Render(Vector2D new_Position, SDL_RendererFlip flip, double angle) 
 {
-	SDL_Rect renderLocation = { 0,0,m_width,m_height};
+	SDL_Rect renderLocation = { new_Position.x,new_Position.y,m_width,m_height};
 	//Render To Screen
-	SDL_RenderCopyEx(m_renderer, m_texture, nullptr, &renderLocation, 0, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(m_renderer, m_texture, nullptr, &renderLocation, 0, nullptr, flip);
 }
 
 void Texture2D::Free() 
