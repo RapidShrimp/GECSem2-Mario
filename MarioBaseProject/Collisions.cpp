@@ -8,6 +8,11 @@ Collisions::~Collisions()
 	m_instance = nullptr;
 }
 
+Collisions* Collisions::Instance()
+{
+	return nullptr;
+}
+
 Collisions::Collisions()
 {
 }

@@ -13,5 +13,6 @@ public:
 private:
 	Collisions();
 	static Collisions* m_instance;
+
 };
 
