@@ -42,10 +42,11 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 		cout << "Circle hit!" << endl;
 	}
 
-	//if (Collisions::Instance()->Box();
-	//{
-	//	cout << "Box hit!" << endl;
-	//}
+	if (Collisions::Instance()->Box(mario_character->GetCollisionBox(),luigi_character->GetCollisionBox()));
+	{
+		cout << "Box hit!" << endl;
+	}
+
 	mario_character->Update(deltaTime, e);
 	luigi_character->Update(deltaTime, e);
 
