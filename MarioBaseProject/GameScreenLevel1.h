@@ -4,6 +4,7 @@
 class Texture2D;
 class Character;
 class CharacterMario;
+class CharacterLuigi;
 
 class GameScreenLevel1 : GameScreen
 {
@@ -16,6 +17,7 @@ public:
 private: 
 	Texture2D* m_background_texture;
 	CharacterMario* mario_character;
+	CharacterLuigi* luigi_character;
 	bool SetupLevel();
 };
 
