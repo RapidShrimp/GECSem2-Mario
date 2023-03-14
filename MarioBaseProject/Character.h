@@ -4,6 +4,8 @@
 
 #include <SDL.h>
 #include "Commons.h"
+#include "Constants.h"
+#include "Texture2D.h"
 #include <iostream>
 
 
@@ -19,8 +21,14 @@ protected:
 	bool m_moving_left;
 	bool m_moving_right;
 
+	bool m_jumping;
+	bool m_can_jump;
+	float m_jump_force;
+
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);
+	virtual void AddGravity(float deltaTime);
+	virtual void Jump();
 
 private:
 	FACING m_facing_direction;

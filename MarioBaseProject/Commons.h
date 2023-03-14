@@ -33,4 +33,3 @@ struct Vector2D
 		FACING_LEFT,
 		FACING_RIGHT
 	};
-
