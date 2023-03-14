@@ -2,6 +2,9 @@
 #include "GameScreen.h"
 #include "Commons.h"
 class Texture2D;
+class Character;
+class CharacterMario;
+class CharacterLuigi;
 
 class GameScreenLevel1 : GameScreen
 {
@@ -13,6 +16,8 @@ public:
 	   void Update(float deltaTime, SDL_Event e) override;
 private: 
 	Texture2D* m_background_texture;
+	CharacterMario* mario_character;
+	CharacterLuigi* luigi_character;
 	bool SetupLevel();
 };
 

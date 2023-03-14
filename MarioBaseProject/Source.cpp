@@ -13,7 +13,6 @@ using namespace std;
 //GlobalVariables
 SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
-//Texture2D* g_texture = nullptr;
 GameScreenManager* game_screen_manager;
 Uint32 g_old_time;
 
@@ -88,11 +87,6 @@ bool InitSDL()
 			return false;
 		}
 	}
-	/*g_texture = new Texture2D(g_renderer);
-	if (!g_texture->LoadFromFile("Images/test.bmp"))
-	{
-		return false;
-	}*/
 
 	return true;
 }
@@ -107,9 +101,6 @@ void CloseSDL()
 	SDL_DestroyRenderer(g_renderer);
 	g_renderer = nullptr;
 
-	////delete Texture
-	//delete g_texture;
-	//g_texture = nullptr;
 
 	delete game_screen_manager;
 	game_screen_manager = nullptr;
@@ -146,9 +137,7 @@ void Render()
 	//Clear Screen
 	SDL_SetRenderDrawColor(g_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(g_renderer);
-	////Render To Screen
-	//g_texture->Render(Vector2D(), SDL_FLIP_NONE);
-	
+
 	game_screen_manager->Render();
 	//Update Screen
 	SDL_RenderPresent(g_renderer);
