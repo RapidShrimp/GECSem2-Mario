@@ -5,6 +5,7 @@
 Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position)
 {
 	m_facing_direction = FACING_RIGHT;
+	m_collision_radius = 15.0f;
 	m_renderer = renderer;
 	m_position = start_position;
 	m_texture = new Texture2D(m_renderer);
@@ -17,6 +18,11 @@ Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D sta
 Character::~Character()
 {
 	m_renderer = nullptr;
+}
+
+float Character::GetCollisionRadius()
+{
+	return m_collision_radius;
 }
 
 void Character::Render()
@@ -43,31 +49,6 @@ void Character::Update(float deltaTime, SDL_Event e)
 	//Left Right Movement
 	if (m_moving_left) {MoveLeft(deltaTime);}
 	else if (m_moving_right) { MoveRight(deltaTime); }
-
-
-	////SDL Key Events
-	//switch (e.type)
-	//{
-	//case SDL_KEYDOWN:
-	//	switch (e.key.keysym.sym)
-	//	{
-	//	case SDLK_RIGHT:
-	//		m_moving_right = true;
-	//		m_moving_left = false;
-	//		break;
-	//	case SDLK_LEFT:
-	//		m_moving_left = true;
-	//		m_moving_right = false;
-	//		break;
-	//	case SDLK_UP:
-	//		Jump();
-	//		break;
-	//	default:
-	//		m_moving_left = false;
-	//		m_moving_right = false;
-	//	}
-	//break;
-	//}
 
 	//Update Positions
 	SetPosition(GetPosition());
