@@ -2,13 +2,14 @@
 
 
 
-Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position)
+Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position,LevelMap* map)
 {
 	m_facing_direction = FACING_RIGHT;
 	m_collision_radius = 15.0f;
 	m_renderer = renderer;
 	m_position = start_position;
 	m_texture = new Texture2D(m_renderer);
+	m_current_level_map = map;
 	if (!m_texture->LoadFromFile(imagePath))
 	{
 		cout << "Failed to Load Texture" << endl;
@@ -33,6 +34,22 @@ void Character::Render()
 
 void Character::Update(float deltaTime, SDL_Event e)
 {
+
+	//collision position variables
+	int centralX_position = (int)(m_position.x + (m_texture->GetWidth() * 0.5)) / TILE_WIDTH;
+	int foot_position = (int)(m_position.y + m_texture->GetHeight()) / TILE_HEIGHT;
+
+	//deal with gravity
+	if (m_current_level_map->GetTileAt(foot_position, centralX_position) == 0)
+	{
+		AddGravity(deltaTime);
+	}
+	else
+	{
+		//collided with ground so we can jump again
+		m_can_jump = true;
+	}
+
 	//Jumping
 	if (m_jumping) 
 	{
@@ -44,7 +61,7 @@ void Character::Update(float deltaTime, SDL_Event e)
 			m_jumping = false;
 		}
 	}
-	AddGravity(deltaTime);
+
 
 	//Left Right Movement
 	if (m_moving_left) {MoveLeft(deltaTime);}

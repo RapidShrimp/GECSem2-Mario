@@ -6,6 +6,7 @@
 #include "Commons.h"
 #include "Constants.h"
 #include "Texture2D.h"
+#include "LevelMap.h"
 #include <iostream>
 
 
@@ -33,8 +34,9 @@ protected:
 
 private:
 	FACING m_facing_direction;
+	LevelMap* m_current_level_map;
 public:
-	Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position);
+	Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map);
 	~Character();
 
 	Rect2D GetCollisionBox() 

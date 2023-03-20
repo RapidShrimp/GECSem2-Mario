@@ -5,6 +5,7 @@ class Texture2D;
 class Character;
 class CharacterMario;
 class CharacterLuigi;
+class LevelMap;
 
 class GameScreenLevel1 : GameScreen
 {
@@ -18,6 +19,8 @@ private:
 	Texture2D* m_background_texture;
 	CharacterMario* mario_character;
 	CharacterLuigi* luigi_character;
+	LevelMap* m_level_map;
 	bool SetupLevel();
+	void SetLevelMap();
 };
 
