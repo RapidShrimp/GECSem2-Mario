@@ -5,7 +5,6 @@
 
 class Texture2D;
 class LevelMap;
-class Vector2D;
 class SDL_Renderer;
 
 class PowBlock
