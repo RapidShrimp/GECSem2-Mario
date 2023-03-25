@@ -14,7 +14,10 @@ public:
 	~PowBlock();
 	void Render();
 	void TakeHit();
-	inline Rect2D GetCollisionBox();
+	inline Rect2D GetCollisionBox() 
+	{
+		return Rect2D(m_position.x,m_position.y,m_single_sprite_h, m_single_sprite_w);
+	}
 	inline bool IsAvailable() { return m_num_hits_left > 0; }
 
 private:
