@@ -31,6 +31,8 @@ protected:
 	virtual void MoveRight(float deltaTime);
 	virtual void AddGravity(float deltaTime);
 	virtual void Jump();
+	virtual bool IsJumping() { return m_jumping; }
+	virtual void CancelJump() { m_jumping = false; }
 
 private:
 	FACING m_facing_direction;

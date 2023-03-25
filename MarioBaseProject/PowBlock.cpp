@@ -29,7 +29,7 @@ PowBlock::~PowBlock()
 
 void PowBlock::Render()
 {
-	if (m_num_hits_left > 0) 
+	if (m_num_hits_left < 0) 
 	{
 		return;
 	}
