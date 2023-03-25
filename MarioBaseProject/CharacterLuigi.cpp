@@ -1,5 +1,5 @@
 #include "CharacterLuigi.h"
-CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position) : Character(renderer, imagePath, start_position)
+CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map) : Character(renderer, imagePath, start_position, map)
 {
 	m_facing_direction = FACING_RIGHT;
 	m_collision_radius = 15.0f;
