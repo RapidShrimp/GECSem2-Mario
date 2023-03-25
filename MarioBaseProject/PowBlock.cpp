@@ -1,8 +1,5 @@
 #include "PowBlock.h"
-#include "Texture2D.h"
-#include "LevelMap.h"
-#include "Constants.h"
-#include "String"
+
 
 PowBlock::PowBlock(SDL_Renderer* renderer, LevelMap* map)
 {

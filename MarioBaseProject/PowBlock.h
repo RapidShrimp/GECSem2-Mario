@@ -2,6 +2,10 @@
 #ifndef _POWBLOCK_H
 #define _POWBLOCK_H
 #include "Commons.h"
+#include "Texture2D.h"
+#include "LevelMap.h"
+#include "Constants.h"
+#include "String"
 
 class Texture2D;
 class LevelMap;
