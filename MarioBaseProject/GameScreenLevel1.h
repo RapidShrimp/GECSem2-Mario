@@ -27,7 +27,6 @@ private:
 	bool SetupLevel();
 	void SetLevelMap();
 	void DoScreenShake();
-
 	bool m_screenshake;
 	float m_shake_time;
 	float m_wobble;
