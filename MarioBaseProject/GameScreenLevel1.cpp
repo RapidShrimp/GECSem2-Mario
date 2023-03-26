@@ -14,7 +14,6 @@ GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer
 	m_level_map = nullptr;
 	SetupLevel(); 
 }
-
 GameScreenLevel1::~GameScreenLevel1() 
 {
 	delete m_background_texture;
@@ -27,8 +26,6 @@ GameScreenLevel1::~GameScreenLevel1()
 	m_pow_block = nullptr;
 	m_enemies.clear();
 }
-
-
 bool GameScreenLevel1::SetupLevel() 
 {
 	SetLevelMap();
@@ -36,6 +33,8 @@ bool GameScreenLevel1::SetupLevel()
 	luigi_character = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(120, 230),m_level_map);
 	m_background_texture = new Texture2D(m_renderer);
 	m_pow_block = new PowBlock(m_renderer, m_level_map);
+	CreateKoopa(Vector2D(150, 32), FACING_LEFT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(325, 32), FACING_RIGHT, KOOPA_SPEED);
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 
@@ -46,7 +45,6 @@ bool GameScreenLevel1::SetupLevel()
 	}
 	return true;
 }
-
 void GameScreenLevel1::SetLevelMap()
 {
 	int map[MAP_HEIGHT][MAP_WIDTH] = {{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
@@ -73,8 +71,6 @@ void GameScreenLevel1::SetLevelMap()
 	m_level_map = new LevelMap(map);
 
 }
-
-
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
 	// do the screen shake if required
@@ -108,8 +104,6 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	luigi_character->Update(deltaTime, e);
 	UpdatePOWBlock();
 	UpdateEnemies(deltaTime, e);
-
-
 }
 
 
@@ -125,12 +119,10 @@ void GameScreenLevel1::Render()
 	}
 }
 
-void GameScreenLevel1::DoScreenShake()
-{
-	m_screenshake = true;
-	m_shake_time = SHAKE_DURATION;
-	m_wobble = 0.0f;
-}
+
+
+
+
 
 void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 {
@@ -179,6 +171,12 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 		}
 	}
 }
+
+void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float speed)
+{
+	m_enemies.push_back(new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed));
+}
+
 void GameScreenLevel1::UpdatePOWBlock()
 {
 	if (Collisions::Instance()->Box(mario_character->GetCollisionBox(), m_pow_block->GetCollisionBox()))
@@ -206,5 +204,15 @@ void GameScreenLevel1::UpdatePOWBlock()
 			}
 
 		}
+	}
+}
+void GameScreenLevel1::DoScreenShake()
+{
+	m_screenshake = true;
+	m_shake_time = SHAKE_DURATION;
+	m_wobble = 0.0f;
+	for (int i = 0; i < m_enemies.size(); i++)
+	{
+		m_enemies[i]->TakeDamage();
 	}
 }
