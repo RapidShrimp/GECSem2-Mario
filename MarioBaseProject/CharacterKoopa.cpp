@@ -72,5 +72,10 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 
 		if (m_injured_time <= 0.0)
 			FlipRightwayUp();
+	}
+}
 
+void CharacterKoopa::SetAlive(bool isAlive)
+{
+	m_alive = isAlive;
 }

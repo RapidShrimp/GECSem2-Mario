@@ -26,9 +26,7 @@ private:
 	CharacterLuigi* luigi_character;
 	LevelMap* m_level_map;
 	PowBlock* m_pow_block;
-
 	vector<CharacterKoopa*> m_enemies;
-
 	bool SetupLevel();
 	void SetLevelMap();
 	void DoScreenShake();

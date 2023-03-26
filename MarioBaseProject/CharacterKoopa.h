@@ -1,6 +1,6 @@
 #pragma once
 #include "Character.h"
-class CharacterKoopa : Character
+class CharacterKoopa : public Character
 {
 	CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D start_position, FACING start_facing, float movement_speed);
 
@@ -17,5 +17,8 @@ public:
 	void Jump();
 	void Render() override;
 	void Update(float deltaTime, SDL_Event e) override;
+	void SetAlive(bool isAlive);
+	bool GetAlive() { return m_alive; }
+	bool GetInjured() { return m_injured; }
 };
 

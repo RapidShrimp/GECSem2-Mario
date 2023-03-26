@@ -10,6 +10,7 @@ Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D sta
 	m_position = start_position;
 	m_texture = new Texture2D(m_renderer);
 	m_current_level_map = map;
+	m_alive = true;
 	if (!m_texture->LoadFromFile(imagePath))
 	{
 		cout << "Failed to Load Texture" << endl;
@@ -24,6 +25,11 @@ Character::~Character()
 float Character::GetCollisionRadius()
 {
 	return m_collision_radius;
+}
+
+void Character::SetAlive(bool isAlive)
+{
+	m_alive = isAlive;
 }
 
 void Character::Render()
