@@ -1,10 +1,12 @@
 #pragma once
 #include "GameScreen.h"
 #include "Commons.h"
+#include <vector>
 class Texture2D;
 class Character;
 class CharacterMario;
 class CharacterLuigi;
+class CharacterKoopa;
 class LevelMap;
 class PowBlock;
 
@@ -24,9 +26,14 @@ private:
 	CharacterLuigi* luigi_character;
 	LevelMap* m_level_map;
 	PowBlock* m_pow_block;
+
+	vector<CharacterKoopa*> m_enemies;
+
 	bool SetupLevel();
 	void SetLevelMap();
 	void DoScreenShake();
+	void UpdateEnemies(float deltaTime, SDL_Event e);
+	void CreateKoopa(Vector2D position, FACING direction, float speed);
 	bool m_screenshake;
 	float m_shake_time;
 	float m_wobble;

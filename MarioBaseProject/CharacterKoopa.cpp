@@ -39,3 +39,38 @@ void CharacterKoopa::Jump()
 		m_can_jump = false;
 	}
 }
+
+void CharacterKoopa::Render()
+{
+}
+
+void CharacterKoopa::Update(float deltaTime, SDL_Event e)
+{
+	Character::Update(deltaTime, e);
+	if (!m_injured)
+	{
+		//enemy is not injured so move
+		if (m_facing_direction == FACING_LEFT)
+		{
+			m_moving_left = true;
+			m_moving_right = false;
+		}
+		else if (m_facing_direction == FACING_RIGHT)
+		{
+			m_moving_right = true;
+			m_moving_left = false;
+		}
+	}
+	else
+	{
+		//we should not be moving when injured
+		m_moving_right = false;
+		m_moving_left = false;
+
+		//count down the injured time
+		m_injured_time -= deltaTime;
+
+		if (m_injured_time <= 0.0)
+			FlipRightwayUp();
+
+}

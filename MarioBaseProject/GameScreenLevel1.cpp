@@ -4,6 +4,7 @@
 #include "CharacterMario.h"
 #include "CharacterLuigi.h"
 #include "Collisions.h"
+#include "CharacterKoopa.h"
 #include "LevelMap.h"
 #include "PowBlock.h"
 #include <iostream>
@@ -24,6 +25,7 @@ GameScreenLevel1::~GameScreenLevel1()
 	luigi_character = nullptr;
 	delete m_pow_block;
 	m_pow_block = nullptr;
+	m_enemies.clear();
 }
 
 
@@ -72,12 +74,6 @@ void GameScreenLevel1::SetLevelMap()
 
 }
 
-void GameScreenLevel1::DoScreenShake()
-{
-	m_screenshake = true;
-	m_shake_time = SHAKE_DURATION;
-	m_wobble = 0.0f;
-}
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
@@ -111,6 +107,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	mario_character->Update(deltaTime, e);
 	luigi_character->Update(deltaTime, e);
 	UpdatePOWBlock();
+	UpdateEnemies(deltaTime, e);
 
 
 }
@@ -122,9 +119,23 @@ void GameScreenLevel1::Render()
 	mario_character->Render();
 	luigi_character->Render();
 	m_pow_block->Render();
-
+	for (int i = 0; i < m_enemies.size(); i++) 
+	{
+		m_enemies[i]->Render();
+	}
 }
 
+void GameScreenLevel1::DoScreenShake()
+{
+	m_screenshake = true;
+	m_shake_time = SHAKE_DURATION;
+	m_wobble = 0.0f;
+}
+
+void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
+{
+
+}
 void GameScreenLevel1::UpdatePOWBlock()
 {
 	if (Collisions::Instance()->Box(mario_character->GetCollisionBox(), m_pow_block->GetCollisionBox()))
@@ -136,6 +147,19 @@ void GameScreenLevel1::UpdatePOWBlock()
 				DoScreenShake();
 				m_pow_block->TakeHit();
 				mario_character->CancelJump();
+			}
+
+		}
+	}
+	if (Collisions::Instance()->Box(luigi_character->GetCollisionBox(), m_pow_block->GetCollisionBox()))
+	{
+		if (m_pow_block->IsAvailable())
+		{
+			if (luigi_character->IsJumping())
+			{
+				DoScreenShake();
+				m_pow_block->TakeHit();
+				luigi_character->CancelJump();
 			}
 
 		}
