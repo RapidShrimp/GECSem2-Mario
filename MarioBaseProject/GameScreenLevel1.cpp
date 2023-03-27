@@ -38,7 +38,7 @@ bool GameScreenLevel1::SetupLevel()
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 
-	if (!m_background_texture->LoadFromFile("Images/test.bmp")) 
+	if (!m_background_texture->LoadFromFile("Images/BackgroundMB.png")) 
 	{
 		cout << "Failed to Load Background Texture" << endl;
 		return false;
@@ -135,7 +135,8 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 			if (m_enemies[i]->GetPosition().y > 300.0f)
 			{
 				//is the enemy off screen to the left / right?
-				if (m_enemies[i]->GetPosition().x < (float)(m_enemies[i]->GetCollisionBox().width * 0.5f) || m_enemies[i]->GetPosition().x > SCREEN_WIDTH - (float)(m_enemies[i] -> GetCollisionBox().width * 0.55f))m_enemies[i]->SetAlive(false);
+				if (m_enemies[i]->GetPosition().x < (float)(m_enemies[i]->GetCollisionBox().width * 0.5f) || m_enemies[i]->GetPosition().x > SCREEN_WIDTH - (float)(m_enemies[i]->GetCollisionBox().width * 0.55f)) 
+				{ m_enemies[i]->SetAlive(false); }
 			}
 			//now do the update
 			m_enemies[i]->Update(deltaTime, e);

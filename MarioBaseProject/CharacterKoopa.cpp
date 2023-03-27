@@ -6,10 +6,8 @@ CharacterKoopa::CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMa
 	m_movement_speed = movement_speed;
 	m_position = start_position;
 	m_injured = false;
-
-	m_single_sprite_w = m_texture->GetWidth() / 2;
+	m_single_sprite_w = m_texture->GetWidth()/2;
 	m_single_sprite_h = m_texture->GetHeight();
-
 }
 
 void CharacterKoopa::FlipRightwayUp()
@@ -40,9 +38,6 @@ void CharacterKoopa::Jump()
 	}
 }
 
-void CharacterKoopa::Render()
-{
-}
 
 void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 {
@@ -70,8 +65,9 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 		//count down the injured time
 		m_injured_time -= deltaTime;
 
-		if (m_injured_time <= 0.0)
-			FlipRightwayUp();
+		if (m_injured_time <= 0.0) 
+		{ FlipRightwayUp(); }
+			
 	}
 }
 
