@@ -7,6 +7,7 @@ public:
 	void TakeDamage();
 	void Jump();
 	void Update(float deltaTime, SDL_Event e) override;
+	void Render() override;
 	void SetAlive(bool isAlive);
 	bool GetAlive() { return m_alive; }
 	bool GetInjured() { return m_injured; }
