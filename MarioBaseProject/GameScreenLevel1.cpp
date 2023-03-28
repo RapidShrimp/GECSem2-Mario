@@ -155,7 +155,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 			}
 
 			//FLIP DIRECTION
-			if (m_enemies[i]->GetPosition().x > 500) {m_enemies[i]->FlipDirection(FACING_LEFT);}
+			if (m_enemies[i]->GetPosition().x > 480) {m_enemies[i]->FlipDirection(FACING_LEFT);}
 			else if (m_enemies[i]->GetPosition().x < 10) { m_enemies[i]->FlipDirection(FACING_RIGHT); }
 
 
