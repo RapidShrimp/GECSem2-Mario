@@ -14,6 +14,7 @@ using namespace std;
 SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
 GameScreenManager* game_screen_manager;
+Mix_Music* g_music = nullptr;
 Uint32 g_old_time;
 
 //FunctionPrototypes
@@ -141,4 +142,14 @@ void Render()
 	game_screen_manager->Render();
 	//Update Screen
 	SDL_RenderPresent(g_renderer);
+}
+
+void LoadMusic(string path) 
+{
+	g_music = Mix_LoadMUS(path.c_str());
+	if (g_music == nullptr)
+	{
+		cout << "Failed to load music. Error: " << Mix_GetError() << endl;
+	}
+
 }
