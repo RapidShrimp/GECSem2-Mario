@@ -26,6 +26,7 @@ protected:
 	bool m_jumping;
 	bool m_can_jump;
 	float m_jump_force;
+	bool m_alive;
 
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);
@@ -40,7 +41,6 @@ private:
 public:
 	Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map);
 	~Character();
-
 	Rect2D GetCollisionBox() 
 	{
 		return Rect2D(m_position.x, m_position.y,
@@ -49,6 +49,8 @@ public:
 
 
 	float GetCollisionRadius();
+	void SetAlive(bool isAlive);
+	bool GetAlive() { return m_alive; }
 	virtual void Render();
 	virtual void Update(float deltaTime, SDL_Event e);
 	void SetPosition(Vector2D new_position);
