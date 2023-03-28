@@ -3,10 +3,6 @@
 
 Collisions* Collisions::m_instance = nullptr;
 
-Collisions::Collisions()
-{
-}
-
 Collisions::~Collisions()
 {
 	m_instance = nullptr;
@@ -22,6 +18,9 @@ Collisions* Collisions::Instance()
 }
 
 
+Collisions::Collisions()
+{
+}
 
 bool Collisions::Circle(Character* character1, Character* character2)
 {
