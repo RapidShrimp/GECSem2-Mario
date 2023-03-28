@@ -1,7 +1,7 @@
 #pragma once
 #define SCREEN_WIDTH 512
 #define SCREEN_HEIGHT 416
-#define MOVESPEED 50.0f
+#define MOVESPEED 75.0f
 #define GRAVITY 260.0f
 #define TILE_WIDTH 32
 #define TILE_HEIGHT 32
