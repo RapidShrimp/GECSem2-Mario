@@ -11,6 +11,7 @@ public:
 	void SetAlive(bool isAlive);
 	bool GetAlive() { return m_alive; }
 	bool GetInjured() { return m_injured; }
+	void FlipDirection(FACING direction);
 private:
 	float m_single_sprite_w;
 	float m_single_sprite_h;

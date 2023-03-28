@@ -18,7 +18,7 @@ public:
 
 	   void Render() override;
 	   void Update(float deltaTime, SDL_Event e) override;
-
+	   void RespawnTimer(float deltaTime);
 	   void UpdatePOWBlock();
 private: 
 	Texture2D* m_background_texture;
@@ -36,6 +36,6 @@ private:
 	float m_shake_time;
 	float m_wobble;
 	float m_background_yPos;
-
+	float CountdownTimer;
 };
 

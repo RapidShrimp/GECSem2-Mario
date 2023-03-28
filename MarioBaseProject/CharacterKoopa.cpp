@@ -21,6 +21,8 @@ void CharacterKoopa::FlipRightwayUp()
 	Jump();
 }
 
+
+
 void CharacterKoopa::TakeDamage()
 {
 	m_injured = true;
@@ -103,4 +105,9 @@ void CharacterKoopa::Render()
 void CharacterKoopa::SetAlive(bool isAlive)
 {
 	m_alive = isAlive;
+}
+
+void CharacterKoopa::FlipDirection(FACING direction)
+{
+	m_facing_direction = direction;
 }
