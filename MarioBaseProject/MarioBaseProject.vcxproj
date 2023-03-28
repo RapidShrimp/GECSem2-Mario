@@ -164,6 +164,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioComponent.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterKoopa.cpp" />
     <ClCompile Include="CharacterLuigi.cpp" />
@@ -185,6 +186,7 @@
     <Library Include="SDL2\SDL\SDL2_mixer.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioComponent.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterKoopa.h" />
     <ClInclude Include="CharacterLuigi.h" />

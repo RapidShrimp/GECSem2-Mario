@@ -8,9 +8,11 @@
 #include "Texture2D.h"
 #include "LevelMap.h"
 #include <iostream>
+#include "AudioComponent.h"
 
 
 class Texture2D;
+class AudioComponent;
 
 class Character
 {
@@ -18,6 +20,7 @@ protected:
 	SDL_Renderer* m_renderer;
 	Vector2D m_position;
 	Texture2D* m_texture;
+	AudioComponent* m_audio;
 
 	bool m_moving_left;
 	bool m_moving_right;
@@ -27,6 +30,7 @@ protected:
 	bool m_can_jump;
 	float m_jump_force;
 	bool m_alive;
+	
 
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);

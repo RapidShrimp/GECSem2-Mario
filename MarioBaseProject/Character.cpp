@@ -102,6 +102,13 @@ void Character::Jump()
 {
 	if (m_can_jump) 
 	{
+		if (m_audio != nullptr) 
+		{
+			delete m_audio;
+			m_audio = nullptr;
+		}
+		m_audio = new AudioComponent(m_renderer);
+		m_audio->LoadAudioFromFile("Music/MarioUnderworld.mp3",0,1);
 		m_can_jump = false;
 		m_jumping = true;
 		m_jump_force = INITIAL_JUMP_FORCE;
