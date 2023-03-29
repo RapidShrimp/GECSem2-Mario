@@ -27,12 +27,12 @@ bool AudioComponent::LoadAudioFromFile(std::string path, bool looping, int chann
 	}
 	else 
 	{
-	PlayAudio(m_sound);
+	PlayAudio();
 	return m_sound != nullptr;
 	}
 }
 
-void AudioComponent::PlayAudio(Mix_Chunk* audio)
+void AudioComponent::PlayAudio()
 {
 	Mix_PlayChannel(m_channel, m_sound, m_looping);
 }
@@ -40,9 +40,9 @@ void AudioComponent::PlayAudio(Mix_Chunk* audio)
 
 void AudioComponent::FreeAudio()
 {
-	if (!m_sound) 
-	{
-		delete m_sound;
-		m_sound = nullptr;
-	}
+	//if (m_sound != nullptr) 
+	//{
+	//	delete m_sound;
+	//	m_sound = nullptr;
+	//}
 }

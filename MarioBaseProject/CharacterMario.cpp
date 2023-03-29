@@ -7,6 +7,8 @@ CharacterMario::CharacterMario(SDL_Renderer* renderer, std::string imagePath, Ve
 	m_renderer = renderer;
 	m_position = start_position;
 	m_texture = new Texture2D(m_renderer);
+	m_audio = new AudioComponent(m_renderer);
+	m_audio->LoadAudioFromFile("Music/Jump.mp3", 0, 1);
 	if (!m_texture->LoadFromFile(imagePath))
 	{
 		cout << "Failed to Load Texture" << endl;
