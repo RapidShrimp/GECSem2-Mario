@@ -36,7 +36,7 @@ int main(int argc, char* args[])
 			Mix_PlayMusic(g_music, -1);
 		}
 
-		game_screen_manager = new GameScreenManager(g_renderer, SCREEN_LEVEL1);
+		game_screen_manager = new GameScreenManager(g_renderer,SCREEN_MENU);
 		g_old_time = SDL_GetTicks();
 
 		bool quit = false;
