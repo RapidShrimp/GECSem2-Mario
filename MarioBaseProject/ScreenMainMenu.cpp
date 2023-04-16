@@ -1,4 +1,5 @@
 #include "ScreenMainMenu.h"
+#include "Constants.h"
 
 ScreenMainMenu::ScreenMainMenu(SDL_Renderer* renderer, GameScreenManager* manager) : GameScreen(renderer)
 {
@@ -19,7 +20,9 @@ ScreenMainMenu::~ScreenMainMenu()
 
 void ScreenMainMenu::Render()
 {
-	m_background_texture->Render(Vector2D(0, 0), SDL_FLIP_NONE);
+	SDL_Rect MenuPortion = { 0,0,240,85 };
+	SDL_Rect Position = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT/2};
+	m_background_texture->Render(MenuPortion,Position, SDL_FLIP_NONE);
 }
 
 void ScreenMainMenu::Update(float deltaTime, SDL_Event e)

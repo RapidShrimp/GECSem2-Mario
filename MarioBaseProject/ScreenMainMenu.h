@@ -14,7 +14,10 @@ private:
 	void Update(float deltaTime, SDL_Event e);
 	bool SetupMenu();
 	Texture2D* m_background_texture;
+	Vector2D m_background_position;
 	SDL_Renderer* m_renderer;
 	GameScreenManager* m_screen_manager;
+	int m_background_width;
+	int m_background_height;
 };
 
