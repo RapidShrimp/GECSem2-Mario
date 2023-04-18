@@ -144,8 +144,8 @@ void GameScreenLevel1::CoinTimer(float deltaTime)
 	if (CountdownTimer <= 0)
 	{
 
-		CreateCoin(Vector2D(20, 30), FACING_RIGHT, KOOPA_SPEED);
-		CreateCoin(Vector2D(456, 30), FACING_LEFT, KOOPA_SPEED);
+		CreateCoin(Vector2D(20, 30), FACING_RIGHT, COIN_SPEED);
+		CreateCoin(Vector2D(456, 30), FACING_LEFT, COIN_SPEED);
 		CountdownTimer = COIN_SPAWN;
 		std::cout << "Respawn" << endl;
 	}
@@ -204,6 +204,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					if (m_enemies[i]->GetInjured())
 					{
 						m_enemies[i]->SetAlive(false);
+						score += 1;
 					}
 					else
 					{
@@ -252,6 +253,7 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 			if (Collisions::Instance()->Circle(m_coins[i], mario_character) || Collisions::Instance()->Circle(m_coins[i], luigi_character))
 			{
 				m_coins[i]->CollectCoin();
+				score += 1;
 			}
 			//if the enemy is no longer alive then schedule it for deletion
 			if (!m_coins[i]->GetAlive())
@@ -288,7 +290,6 @@ void GameScreenLevel1::UpdatePOWBlock()
 				DoScreenShake();
 				m_pow_block->TakeHit();
 				mario_character->CancelJump();
-				score += 1;
 			}
 
 		}

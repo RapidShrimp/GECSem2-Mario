@@ -30,7 +30,7 @@ protected:
 	bool m_can_jump;
 	float m_jump_force;
 	bool m_alive;
-	
+	float m_movement_speed;
 
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);
