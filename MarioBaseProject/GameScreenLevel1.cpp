@@ -1,5 +1,6 @@
 #include "GameScreenLevel1.h"
 #include "Texture2D.h"
+#include "TextRenderer.h"
 #include "Character.h"
 #include "CharacterMario.h"
 #include "CharacterLuigi.h"
@@ -42,6 +43,11 @@ bool GameScreenLevel1::SetupLevel()
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 	CountdownTimer = KOOPA_RESPAWN;
+	m_score_text = new TextRenderer(m_renderer);
+	if (m_score_text)
+	{
+		m_score_text->LoadFont("Fonts/PixelFont.ttf", 20, "Score: " + to_string(score), { 255, 255, 255, 255 });
+	}
 
 	if (!m_background_texture->LoadFromFile("Images/BackgroundMB.png")) 
 	{
@@ -112,6 +118,11 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	UpdateCoins(deltaTime, e);
 	RespawnTimer(deltaTime);
 	CoinTimer(deltaTime);
+	if (m_score_text != nullptr && score != oldScore) 
+	{
+		oldScore = score;
+		m_score_text->LoadFont("Fonts/PixelFont.ttf", 20, "Score: " + to_string(score), { 255,255,255,255 });
+	}
 }
 
 void GameScreenLevel1::RespawnTimer(float deltaTime)
@@ -155,6 +166,7 @@ void GameScreenLevel1::Render()
 	{
 		m_coins[i]->Render();
 	}
+	m_score_text->Render(200, 10);
 }
 
 void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
@@ -276,6 +288,7 @@ void GameScreenLevel1::UpdatePOWBlock()
 				DoScreenShake();
 				m_pow_block->TakeHit();
 				mario_character->CancelJump();
+				score += 1;
 			}
 
 		}

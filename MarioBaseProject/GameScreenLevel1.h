@@ -10,6 +10,7 @@ class CharacterKoopa;
 class Coin;
 class LevelMap;
 class PowBlock;
+class TextRenderer;
 
 class GameScreenLevel1 : GameScreen
 {
@@ -28,6 +29,7 @@ private:
 	CharacterLuigi* luigi_character;
 	LevelMap* m_level_map;
 	PowBlock* m_pow_block;
+	TextRenderer* m_score_text;
 	vector<CharacterKoopa*> m_enemies;
 	vector<Coin*>m_coins;
 	bool SetupLevel();
@@ -42,5 +44,8 @@ private:
 	float m_wobble;
 	float m_background_yPos;
 	float CountdownTimer;
+
+	int score;
+	int oldScore;
 };
 
