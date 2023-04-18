@@ -20,7 +20,7 @@ ScreenMainMenu::~ScreenMainMenu()
 
 void ScreenMainMenu::Render()
 {
-	SDL_Rect MenuPortion = { 0,0,240,85 };
+	SDL_Rect MenuPortion = { 0,0,240,96 };
 	SDL_Rect Position = {0,0,SCREEN_WIDTH,SCREEN_HEIGHT/2};
 	m_background_texture->Render(MenuPortion,Position, SDL_FLIP_NONE);
 }

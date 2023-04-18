@@ -155,7 +155,7 @@ bool Update()
 void Render()
 {
 	//Clear Screen
-	SDL_SetRenderDrawColor(g_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(g_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(g_renderer);
 
 	game_screen_manager->Render();

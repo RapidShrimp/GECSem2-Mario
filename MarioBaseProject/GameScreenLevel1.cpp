@@ -33,8 +33,8 @@ bool GameScreenLevel1::SetupLevel()
 	luigi_character = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(120, 230),m_level_map);
 	m_background_texture = new Texture2D(m_renderer);
 	m_pow_block = new PowBlock(m_renderer, m_level_map);
-	CreateKoopa(Vector2D(420, 300), FACING_LEFT, KOOPA_SPEED/4.0f);
-	CreateKoopa(Vector2D(325, 32), FACING_RIGHT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(20, 30), FACING_RIGHT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(456, 30), FACING_LEFT, KOOPA_SPEED);
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 	CountdownTimer = KOOPA_RESPAWN;
@@ -114,8 +114,8 @@ void GameScreenLevel1::RespawnTimer(float deltaTime)
 	if (CountdownTimer <= 0) 
 	{
 		
-		CreateKoopa(Vector2D(420, 300), FACING_LEFT, KOOPA_SPEED / 4.0f);
-		CreateKoopa(Vector2D(325, 32), FACING_RIGHT, KOOPA_SPEED);
+		CreateKoopa(Vector2D(20, 30), FACING_RIGHT, KOOPA_SPEED);
+		CreateKoopa(Vector2D(456, 30), FACING_LEFT, KOOPA_SPEED);
 		CountdownTimer = KOOPA_RESPAWN;
 		std::cout << "Respawn" << endl;
 	}
