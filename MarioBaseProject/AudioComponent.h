@@ -16,7 +16,7 @@ public:
 	~AudioComponent();
 
 	bool LoadAudioFromFile(std::string path, bool looping, int Channel);
-	void PlayAudio(Mix_Chunk* audio);
+	void PlayAudio();
 	void FreeAudio();
 	bool m_looping;
 	int m_channel;
