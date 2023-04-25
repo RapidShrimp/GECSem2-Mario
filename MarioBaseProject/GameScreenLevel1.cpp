@@ -35,7 +35,7 @@ bool GameScreenLevel1::SetupLevel()
 {
 	SetLevelMap();
 	mario_character = new CharacterMario(m_renderer, "Images/MarioSprite.png", Vector2D(64, 230),m_level_map);
-	luigi_character = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(120, 230),m_level_map);
+	luigi_character = new CharacterLuigi(m_renderer, "Images/LuigiSprite.png", Vector2D(120, 230),m_level_map);
 	m_background_texture = new Texture2D(m_renderer);
 	m_pow_block = new PowBlock(m_renderer, m_level_map);
 	CreateKoopa(Vector2D(20, 30), FACING_RIGHT, KOOPA_SPEED);

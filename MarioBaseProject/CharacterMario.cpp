@@ -33,10 +33,12 @@ void CharacterMario::Update(float deltaTime,SDL_Event e)
 		case SDLK_a:
 			m_moving_left = true;
 			m_moving_right = false;
+			m_facing_direction = FACING_RIGHT;
 			break;
 		case SDLK_d:
 			m_moving_right = true;
 			m_moving_left = false;
+			m_facing_direction = FACING_LEFT;
 			break;
 		case SDLK_w:
 			if (m_can_jump)
@@ -58,18 +60,29 @@ void CharacterMario::Update(float deltaTime,SDL_Event e)
 		}
 		break;
 
-		m_frame_delay -= deltaTime;
+	}
+	Character::Update(deltaTime,e);
+	m_frame_delay -= deltaTime;
+
+	if (IsJumping())
+	{
+	m_current_frame = 5;
+	}
+	else if (m_moving_left || m_moving_right)
+	{
 		if (m_frame_delay <= 0.0f)
 		{
-			m_frame_delay = ANIMATION_DELAY;
+			m_frame_delay = 100;
 			m_current_frame++;
-			if (m_current_frame > 7)
+			if (m_current_frame > 3)
 			{
 				m_current_frame = 0;
 			}
 		}
 	}
-	Character::Update(deltaTime,e);
+
+	else m_current_frame = 0;
+
 }
 
 void CharacterMario::Render()
@@ -90,4 +103,5 @@ void CharacterMario::Render()
 	{
 		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_HORIZONTAL);
 	}
+
 }
