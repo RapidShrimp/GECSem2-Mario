@@ -7,7 +7,8 @@ Coin::Coin(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D sta
 	m_position = start_position;
 	m_single_sprite_w = m_texture->GetWidth() / 3;
 	m_single_sprite_h = m_texture->GetHeight();
-
+	m_audio = new AudioComponent(m_renderer);
+	
 }
 
 void Coin::FlipRightwayUp()
@@ -93,6 +94,8 @@ void Coin::SetAlive(bool isAlive)
 void Coin::CollectCoin()
 {
 	m_alive = false;
+	m_audio->LoadAudioFromFile("Music/Coin.mp3", 0, 1);
+	//if (m_audio != nullptr) { m_audio->PlayAudio(); }
 }
 
 void Coin::FlipDirection(FACING direction)

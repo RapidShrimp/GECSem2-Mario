@@ -13,6 +13,8 @@ CharacterMario::CharacterMario(SDL_Renderer* renderer, std::string imagePath, Ve
 	{
 		cout << "Failed to Load Texture" << endl;
 	}
+	m_single_sprite_w = m_texture->GetWidth() / 8;
+	m_single_sprite_h = m_texture->GetHeight();
 }
 
 CharacterMario::~CharacterMario()
@@ -55,6 +57,37 @@ void CharacterMario::Update(float deltaTime,SDL_Event e)
 			break;
 		}
 		break;
+
+		m_frame_delay -= deltaTime;
+		if (m_frame_delay <= 0.0f)
+		{
+			m_frame_delay = ANIMATION_DELAY;
+			m_current_frame++;
+			if (m_current_frame > 7)
+			{
+				m_current_frame = 0;
+			}
+		}
 	}
 	Character::Update(deltaTime,e);
+}
+
+void CharacterMario::Render()
+{
+	//get the portion of the sprite sheet you want to draw
+	//							   {xPos, yPos, width of sprite, height of sprite}
+	SDL_Rect portion_of_sprite = { m_single_sprite_w * m_current_frame,0,m_single_sprite_w,m_single_sprite_h };
+
+	//determine where you want it drawn
+	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y), m_single_sprite_w, m_single_sprite_h};
+
+	//then draw it facing the correct direction
+	if (m_facing_direction == FACING_RIGHT)
+	{
+		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_NONE);
+	}
+	else
+	{
+		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_HORIZONTAL);
+	}
 }

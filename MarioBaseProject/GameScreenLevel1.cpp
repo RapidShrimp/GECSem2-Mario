@@ -34,7 +34,7 @@ GameScreenLevel1::~GameScreenLevel1()
 bool GameScreenLevel1::SetupLevel() 
 {
 	SetLevelMap();
-	mario_character = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 230),m_level_map);
+	mario_character = new CharacterMario(m_renderer, "Images/MarioSprite.png", Vector2D(64, 230),m_level_map);
 	luigi_character = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(120, 230),m_level_map);
 	m_background_texture = new Texture2D(m_renderer);
 	m_pow_block = new PowBlock(m_renderer, m_level_map);
@@ -48,7 +48,6 @@ bool GameScreenLevel1::SetupLevel()
 	{
 		m_score_text->LoadFont("Fonts/PixelFont.ttf", 20, "Score: " + to_string(score), { 255, 255, 255, 255 });
 	}
-
 	if (!m_background_texture->LoadFromFile("Images/BackgroundMB.png")) 
 	{
 		cout << "Failed to Load Background Texture" << endl;
