@@ -79,7 +79,7 @@ void CharacterMario::Render()
 	SDL_Rect portion_of_sprite = { m_single_sprite_w * m_current_frame,0,m_single_sprite_w,m_single_sprite_h };
 
 	//determine where you want it drawn
-	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y), m_single_sprite_w, m_single_sprite_h};
+	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y)-m_single_sprite_h+10, 32, 42};
 
 	//then draw it facing the correct direction
 	if (m_facing_direction == FACING_RIGHT)
