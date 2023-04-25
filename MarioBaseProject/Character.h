@@ -30,7 +30,7 @@ protected:
 	bool m_can_jump;
 	float m_jump_force;
 	bool m_alive;
-	
+	float m_movement_speed;
 
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);
@@ -48,7 +48,7 @@ public:
 	Rect2D GetCollisionBox() 
 	{
 		return Rect2D(m_position.x, m_position.y,
-			m_texture->GetWidth(), m_texture->GetHeight());
+			GetWidth(), GetHeight());
 	}
 
 
@@ -59,6 +59,9 @@ public:
 	virtual void Update(float deltaTime, SDL_Event e);
 	void SetPosition(Vector2D new_position);
 	Vector2D GetPosition();
+	virtual int GetWidth() { return m_texture->GetWidth(); }
+	virtual int GetHeight() { return m_texture->GetHeight(); };
+
 };
 
 #endif _CHARACTER_H

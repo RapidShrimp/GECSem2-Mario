@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "Constants.h"
 #include "Commons.h"
@@ -15,7 +16,8 @@ SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
 GameScreenManager* game_screen_manager;
 Mix_Music* g_music = nullptr;
-Uint32 g_old_time;
+TTF_Font* g_font = nullptr;
+Uint32 g_old_time; 
 
 //FunctionPrototypes
 bool InitSDL();
@@ -101,6 +103,14 @@ bool InitSDL()
 			return false;
 		}
 
+		//Initialise the font
+		TTF_Init();
+		if (TTF_Init() == -1)
+		{
+			cout << "Font could not init. Error: " << TTF_GetError();
+			return false;
+		}
+		
 	}
 
 
@@ -121,6 +131,8 @@ void CloseSDL()
 	Mix_FreeMusic(g_music);
 	g_music = nullptr;
 
+	TTF_Quit();
+	g_font = nullptr;
 	//release the game screen manager
 	delete game_screen_manager;
 	game_screen_manager = nullptr;
