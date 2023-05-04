@@ -6,7 +6,7 @@ CharacterKoopa::CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMa
 	m_movement_speed = movement_speed;
 	m_position = start_position;
 	m_injured = false;
-	m_single_sprite_w = m_texture->GetWidth()/2;
+	m_single_sprite_w = m_texture->GetWidth()/13;
 	m_single_sprite_h = m_texture->GetHeight();
 }
 
@@ -26,6 +26,7 @@ void CharacterKoopa::FlipRightwayUp()
 void CharacterKoopa::TakeDamage()
 {
 	m_injured = true;
+	m_current_frame = 7;
 	m_injured_time = INJURED_TIME;
 	Jump();
 }
@@ -44,6 +45,7 @@ void CharacterKoopa::Jump()
 void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 {
 	Character::Update(deltaTime, e);
+	m_frame_delay -= deltaTime;
 	if (!m_injured)
 	{
 		//enemy is not injured so move
@@ -57,6 +59,16 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 			m_moving_right = true;
 			m_moving_left = false;
 		}
+
+		if (m_frame_delay <= 0.0f)
+		{
+			m_frame_delay = 100;
+			m_current_frame++;
+			if (m_current_frame > 3)
+			{
+				m_current_frame = 0;
+			}
+		}
 	}
 	else
 	{
@@ -64,31 +76,36 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 		m_moving_right = false;
 		m_moving_left = false;
 
+
 		//count down the injured time
 		m_injured_time -= deltaTime;
 
 		if (m_injured_time <= 0.0) 
-		{ FlipRightwayUp(); }
-			
+
+		{ FlipRightwayUp();
+		}
+		if (m_frame_delay <= 0.0f)
+		{
+			m_frame_delay = 500;
+			m_current_frame++;
+			if (m_current_frame > 12)
+			{
+				m_current_frame = 7;
+			}
+		}
 	}
+
 }
 
 void CharacterKoopa::Render()
 {
-	//variable to hold the left position of the sprite we want to draw
-	int left = 0.0f;
-
-	//if injured move the left position to be the left position of the second image of the sprite sheet
-	if (m_injured)
-		left = m_single_sprite_w;
-
 
 	//get the portion of the sprite sheet you want to draw
 	//							   {xPos, yPos, width of sprite, height of sprite}
-	SDL_Rect portion_of_sprite = { left,0,m_single_sprite_w, m_single_sprite_h };
+	SDL_Rect portion_of_sprite = { m_single_sprite_w*m_current_frame,0,m_single_sprite_w, m_single_sprite_h};
 
 	//determine where you want it drawn
-	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y), m_single_sprite_w, m_single_sprite_h };
+	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y) - m_single_sprite_h + 10, 48, 42 };
 
 	//then draw it facing the correct direction
 	if (m_facing_direction == FACING_RIGHT)

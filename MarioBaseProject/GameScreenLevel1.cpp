@@ -275,7 +275,7 @@ void GameScreenLevel1::CreateCoin(Vector2D position, FACING direction, float spe
 
 void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float speed)
 {
-	m_enemies.push_back(new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed));
+	m_enemies.push_back(new CharacterKoopa(m_renderer, "Images/KoopaSpriteSheet.png", m_level_map, position, direction, speed));
 }
 
 void GameScreenLevel1::UpdatePOWBlock()
