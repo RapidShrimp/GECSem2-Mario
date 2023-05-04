@@ -33,7 +33,7 @@ void ScreenMainMenu::Update(float deltaTime, SDL_Event e)
 		switch (e.key.keysym.sym)
 		{
 		case SDLK_SPACE:
-			m_screen_manager->ChangeScreen(SCREEN_LEVEL1);
+			m_screen_manager->ChangeScreen(SCREEN_LEVEL2);
 			break;
 		}
 	}
