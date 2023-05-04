@@ -82,8 +82,7 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 
 		if (m_injured_time <= 0.0) 
 
-		{ FlipRightwayUp();
-		}
+		{ FlipRightwayUp();}
 		if (m_frame_delay <= 0.0f)
 		{
 			m_frame_delay = 500;
