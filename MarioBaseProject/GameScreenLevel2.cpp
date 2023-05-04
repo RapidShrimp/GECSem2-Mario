@@ -36,7 +36,7 @@ bool GameScreenLevel2::SetupLevel()
 	m_background_yPos = 0.0f;
 	CountdownTimer = KOOPA_RESPAWN;
 
-	if (!m_background_texture->LoadFromFile("Images/BackgroundMB.png"))
+	if (!m_background_texture->LoadFromFile("Images/BackgroundMBL2.png"))
 	{
 		cout << "Failed to Load Background Texture" << endl;
 		return false;
@@ -47,8 +47,8 @@ void GameScreenLevel2::SetLevelMap()
 {
 	int map[MAP_HEIGHT][MAP_WIDTH] = {{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 									  { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
-									  { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 									  { 1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1 },
+									  { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 									  { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 									  { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 },
 									  { 1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1 },
