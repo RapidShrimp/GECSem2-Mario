@@ -52,7 +52,7 @@ void ScreenMainMenu::Update(float deltaTime, SDL_Event e)
 	case SDL_KEYDOWN:
 		switch (e.key.keysym.sym)
 		{
-		case SDLK_SPACE:
+		case SDLK_RETURN:
 			m_screen_manager->m_singleplayer = IsSinglePlayer;
 			m_screen_manager->ChangeScreen(SCREEN_LEVEL1);
 			break;
