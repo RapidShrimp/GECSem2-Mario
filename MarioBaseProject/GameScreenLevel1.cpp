@@ -11,9 +11,11 @@
 #include "PowBlock.h"
 #include <iostream>
 
-GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer) 
+GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer, GameScreenManager* manager, bool isSingleplayer) : GameScreen(renderer) 
 { 
 	m_level_map = nullptr;
+	m_screen_manager = manager;
+	m_singleplayer = isSingleplayer;
 	SetupLevel(); 
 }
 GameScreenLevel1::~GameScreenLevel1() 
@@ -22,12 +24,17 @@ GameScreenLevel1::~GameScreenLevel1()
 	m_background_texture = nullptr;
 	delete mario_character;
 	mario_character = nullptr;
-	delete luigi_character;
-	luigi_character = nullptr;
+	if (!m_singleplayer) 
+	{
+		delete luigi_character;
+		luigi_character = nullptr;
+	}
 	delete m_pow_block;
 	m_pow_block = nullptr;
 	delete m_level_map;
 	m_level_map = nullptr;
+	delete m_screen_manager;
+	m_screen_manager = nullptr;
 	m_enemies.clear();
 	m_coins.clear();
 }
@@ -35,7 +42,10 @@ bool GameScreenLevel1::SetupLevel()
 {
 	SetLevelMap();
 	mario_character = new CharacterMario(m_renderer, "Images/MarioSprite.png", Vector2D(64, 230),m_level_map);
-	luigi_character = new CharacterLuigi(m_renderer, "Images/LuigiSprite.png", Vector2D(120, 230),m_level_map);
+	if (!m_singleplayer)
+	{
+		luigi_character = new CharacterLuigi(m_renderer, "Images/LuigiSprite.png", Vector2D(120, 230), m_level_map);
+	}
 	m_background_texture = new Texture2D(m_renderer);
 	m_pow_block = new PowBlock(m_renderer, m_level_map);
 	CreateKoopa(Vector2D(20, 30), FACING_RIGHT, KOOPA_SPEED);
@@ -98,20 +108,20 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 			m_background_yPos = 0.0f;
 		}
 	}
-	
-	if (Collisions::Instance()->Circle(mario_character, luigi_character))
-	{
-		cout << "Circle hit!" << endl;
-	}
+	//
+	//if (Collisions::Instance()->Circle(mario_character, luigi_character))
+	//{
+	//	cout << "Circle hit!" << endl;
+	//}
 
-	if (Collisions::Instance()->Box(mario_character->GetCollisionBox(),luigi_character->GetCollisionBox()))
-	{
-		cout << "Box hit!" << endl;
-	}
+	//if (Collisions::Instance()->Box(mario_character->GetCollisionBox(),luigi_character->GetCollisionBox()))
+	//{
+	//	cout << "Box hit!" << endl;
+	//}
 
 
 	mario_character->Update(deltaTime, e);
-	luigi_character->Update(deltaTime, e);
+	if (!m_singleplayer) { luigi_character->Update(deltaTime, e); }
 	UpdatePOWBlock();
 	UpdateEnemies(deltaTime, e);
 	UpdateCoins(deltaTime, e);
@@ -155,7 +165,7 @@ void GameScreenLevel1::Render()
 {
 	m_background_texture->Render(Vector2D(0,m_background_yPos), SDL_FLIP_NONE);
 	mario_character->Render();
-	luigi_character->Render();
+	if (!m_singleplayer) {luigi_character->Render();}
 	m_pow_block->Render();
 	for (int i = 0; i < m_enemies.size(); i++) 
 	{
@@ -198,7 +208,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 			}
 			else
 			{
-				if (Collisions::Instance()->Circle(m_enemies[i], mario_character) || Collisions::Instance()->Circle(m_enemies[i],luigi_character))
+				if (Collisions::Instance()->Circle(m_enemies[i], mario_character))
 				{
 					if (m_enemies[i]->GetInjured())
 					{
@@ -208,6 +218,21 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					else
 					{
 						//Kill mario
+					}
+				}
+				if (!m_singleplayer) 
+				{
+					if (Collisions::Instance()->Circle(m_enemies[i], luigi_character))
+					{
+						if (m_enemies[i]->GetInjured())
+						{
+							m_enemies[i]->SetAlive(false);
+							score += 1;
+						}
+						else
+						{
+							//Kill mario
+						}
 					}
 				}
 			}
@@ -249,7 +274,16 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 			//now do the update
 			m_coins[i]->Update(deltaTime, e);
 			//check to see if coin collides with player
-			if (Collisions::Instance()->Circle(m_coins[i], mario_character) || Collisions::Instance()->Circle(m_coins[i], luigi_character))
+			if (!m_singleplayer) 
+			{
+				if (Collisions::Instance()->Circle(m_coins[i], luigi_character)) 
+				{
+					m_coins[i]->CollectCoin();
+					score += 1;
+				}
+			}
+
+			if (Collisions::Instance()->Circle(m_coins[i], mario_character)) 
 			{
 				m_coins[i]->CollectCoin();
 				score += 1;
@@ -293,17 +327,20 @@ void GameScreenLevel1::UpdatePOWBlock()
 
 		}
 	}
-	if (Collisions::Instance()->Box(luigi_character->GetCollisionBox(), m_pow_block->GetCollisionBox()))
+	if (!m_singleplayer) 
 	{
-		if (m_pow_block->IsAvailable())
+		if (Collisions::Instance()->Box(luigi_character->GetCollisionBox(), m_pow_block->GetCollisionBox()))
 		{
-			if (luigi_character->IsJumping())
+			if (m_pow_block->IsAvailable())
 			{
-				DoScreenShake();
-				m_pow_block->TakeHit();
-				luigi_character->CancelJump();
-			}
+				if (luigi_character->IsJumping())
+				{
+					DoScreenShake();
+					m_pow_block->TakeHit();
+					luigi_character->CancelJump();
+				}
 
+			}
 		}
 	}
 }

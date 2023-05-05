@@ -14,8 +14,8 @@ public :
 	ScreenMainMenu(SDL_Renderer* renderer, GameScreenManager* manager);
 	~ScreenMainMenu();
 	void Render();
-	bool IsPlayer1;
-	void SelectOther() { IsPlayer1 == !IsPlayer1; }
+	bool IsSinglePlayer = true;
+	inline bool SelectOther() { return !IsSinglePlayer; }
 private:
 	void Update(float deltaTime, SDL_Event e);
 	bool SetupMenu();

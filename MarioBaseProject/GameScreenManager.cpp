@@ -43,7 +43,7 @@ void GameScreenManager::ChangeScreen(SCREENS new_screen)
 		m_CurrentScreen = (GameScreen*)new ScreenMainMenu(m_renderer,this);
 		break;
 	case SCREEN_LEVEL1:
-		m_CurrentScreen = (GameScreen*)new GameScreenLevel1(m_renderer);
+		m_CurrentScreen = (GameScreen*)new GameScreenLevel1(m_renderer,this,m_singleplayer);
 		break;
 	case SCREEN_LEVEL2:
 		m_CurrentScreen = (GameScreen*)new GameScreenLevel2(m_renderer);

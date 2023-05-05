@@ -14,7 +14,7 @@ private:
 public:
 	GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen);
 	~GameScreenManager();
-
+	bool m_singleplayer;
 	void Render();
 	void Update(float deltaTime,SDL_Event e);
 	void ChangeScreen(SCREENS new_screen);

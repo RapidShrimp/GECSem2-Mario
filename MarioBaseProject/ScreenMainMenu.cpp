@@ -33,11 +33,11 @@ void ScreenMainMenu::Render()
 
 	SDL_Rect SelectPortion = { 52,106,9,9 };
 	SDL_Rect SelectPosition;
-	if (IsPlayer1)
+	if (IsSinglePlayer)
 	{
 		SelectPosition = { 80,SCREEN_HEIGHT / 2 + 58, 30,30};
 	}
-	else 
+	else if (!IsSinglePlayer)
 	{ 
 		SelectPosition = { 80,SCREEN_HEIGHT / 2 + 118, 30,30 };
 	}
@@ -53,7 +53,12 @@ void ScreenMainMenu::Update(float deltaTime, SDL_Event e)
 		switch (e.key.keysym.sym)
 		{
 		case SDLK_SPACE:
+			m_screen_manager->m_singleplayer = IsSinglePlayer;
 			m_screen_manager->ChangeScreen(SCREEN_LEVEL1);
+			break;
+		case SDLK_UP:
+		case SDLK_DOWN:
+			IsSinglePlayer = SelectOther();
 			break;
 		}
 	}

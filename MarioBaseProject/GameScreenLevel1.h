@@ -11,11 +11,12 @@ class Coin;
 class LevelMap;
 class PowBlock;
 class TextRenderer;
+class GameScreenManager;
 
 class GameScreenLevel1 : GameScreen
 {
 public:
-	   GameScreenLevel1(SDL_Renderer* renderer);
+	   GameScreenLevel1(SDL_Renderer* renderer, GameScreenManager* manager, bool isSingleplayer);
 	   ~GameScreenLevel1();
 
 	   void Render() override;
@@ -32,6 +33,9 @@ private:
 	TextRenderer* m_score_text;
 	vector<CharacterKoopa*> m_enemies;
 	vector<Coin*>m_coins;
+	GameScreenManager* m_screen_manager;
+	bool m_singleplayer;
+
 	bool SetupLevel();
 	void SetLevelMap();
 	void DoScreenShake();
