@@ -8,6 +8,7 @@ CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, std::string imagePath, Ve
 	m_texture = new Texture2D(m_renderer);
 	m_audio = new AudioComponent(m_renderer);
 	m_audio->LoadAudioFromFile("Music/Jump.mp3", 0, 1);
+	//m_death_audio->LoadAudioFromFile("Music/Death.mp3", 0, 2);
 	if (!m_texture->LoadFromFile(imagePath))
 	{
 		cout << "Failed to Load Texture" << endl;

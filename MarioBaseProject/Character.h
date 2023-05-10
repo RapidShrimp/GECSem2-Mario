@@ -21,6 +21,7 @@ protected:
 	Vector2D m_position;
 	Texture2D* m_texture;
 	AudioComponent* m_audio;
+	
 
 	bool m_moving_left;
 	bool m_moving_right;
@@ -53,7 +54,7 @@ public:
 
 
 	float GetCollisionRadius();
-	void SetAlive(bool isAlive);
+	virtual void SetAlive(bool isAlive);
 	bool GetAlive() { return m_alive; }
 	virtual void Render();
 	virtual void Update(float deltaTime, SDL_Event e);

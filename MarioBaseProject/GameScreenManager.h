@@ -18,7 +18,8 @@ public:
 	void Render();
 	void Update(float deltaTime,SDL_Event e);
 	void ChangeScreen(SCREENS new_screen);
-
+	inline void SetScore(int score) { CurrentScore = score; }
+	int CurrentScore;
 
 };
 

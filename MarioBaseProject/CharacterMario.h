@@ -10,6 +10,7 @@ public:
 	bool IsJumping() { return m_jumping; }
 	void CancelJump() { m_jumping = false; }
 	void Update(float deltaTime, SDL_Event e) override;
+	void SetAlive(bool isAlive) override;
 	void Render() override;
 	int m_single_sprite_w;
 	int m_single_sprite_h;

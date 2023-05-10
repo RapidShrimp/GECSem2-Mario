@@ -217,7 +217,9 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					}
 					else
 					{
-						//Kill mario
+						mario_character->SetAlive(false);
+						m_screen_manager->ChangeScreen(SCREEN_GAMEOVER);
+						//m_screen_manager->SetScore(score);
 					}
 				}
 				if (!m_singleplayer) 
@@ -231,7 +233,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 						}
 						else
 						{
-							//Kill mario
+							luigi_character->SetAlive(false);
 						}
 					}
 				}
@@ -311,6 +313,7 @@ void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float sp
 {
 	m_enemies.push_back(new CharacterKoopa(m_renderer, "Images/KoopaSpriteSheet.png", m_level_map, position, direction, speed));
 }
+
 
 void GameScreenLevel1::UpdatePOWBlock()
 {

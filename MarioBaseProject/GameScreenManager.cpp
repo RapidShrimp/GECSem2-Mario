@@ -3,11 +3,13 @@
 #include "ScreenMainMenu.h"
 #include "GameScreenLevel1.h"
 #include "GameScreenLevel2.h"
+#include "GameScreenOver.h"
 
 GameScreenManager::GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen)
 {
 	m_renderer = renderer;
 	m_CurrentScreen = nullptr;
+	CurrentScore = 1;
 	ChangeScreen(startScreen);
 }
 
@@ -49,6 +51,7 @@ void GameScreenManager::ChangeScreen(SCREENS new_screen)
 		m_CurrentScreen = (GameScreen*)new GameScreenLevel2(m_renderer,this,m_singleplayer);
 		break;
 	case SCREEN_GAMEOVER:
+		m_CurrentScreen = (GameScreen*)new GameScreenOver(m_renderer, this, CurrentScore);
 		break;
 	case SCREEN_HIGHSCORES:
 		break;
