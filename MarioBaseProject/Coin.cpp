@@ -11,6 +11,16 @@ Coin::Coin(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D sta
 	
 }
 
+Coin::~Coin()
+{
+	delete m_renderer;
+	m_renderer = nullptr;
+	delete m_texture;
+	m_texture = nullptr;
+	delete m_audio;
+	m_audio = nullptr;
+}
+
 void Coin::FlipRightwayUp()
 {
 	if (m_facing_direction == FACING_LEFT)

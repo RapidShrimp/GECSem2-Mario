@@ -4,6 +4,7 @@ class CharacterKoopa : public Character
 {
 public:
 	CharacterKoopa(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D start_position, FACING start_facing, float movement_speed);
+	~CharacterKoopa();
 	void TakeDamage();
 	void Jump();
 	void Update(float deltaTime, SDL_Event e) override;

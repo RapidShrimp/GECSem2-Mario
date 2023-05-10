@@ -16,6 +16,12 @@ ScreenMainMenu::~ScreenMainMenu()
 	m_renderer = nullptr;
 	delete m_screen_manager;
 	m_screen_manager = nullptr;
+	delete m_SingleplayerText;
+	m_SingleplayerText = nullptr;
+	delete m_MultiplayerText;
+	m_MultiplayerText = nullptr;
+	delete m_character_select;
+	m_character_select = nullptr;
 }
 
 void ScreenMainMenu::Render()

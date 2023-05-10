@@ -10,6 +10,16 @@ GameScreenOver::GameScreenOver(SDL_Renderer* renderer, GameScreenManager* manage
 
 GameScreenOver::~GameScreenOver()
 {
+	delete m_renderer;
+	m_renderer = nullptr;
+	delete m_manager;
+	m_manager = nullptr;
+	delete m_background_texture;
+	m_background_texture = nullptr;
+	delete ScoreDisplay;
+	ScoreDisplay = nullptr;
+	delete ReturnText;
+	ReturnText = nullptr;
 }
 
 bool GameScreenOver::SetupLevel() 

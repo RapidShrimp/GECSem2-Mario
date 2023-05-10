@@ -19,6 +19,12 @@ CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, std::string imagePath, Ve
 
 CharacterLuigi::~CharacterLuigi()
 {
+	delete m_renderer;
+	m_renderer = nullptr;
+	delete m_texture;
+	m_texture = nullptr;
+	delete m_audio;
+	m_audio = nullptr;
 }
 
 
