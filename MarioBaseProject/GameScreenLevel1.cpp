@@ -108,6 +108,10 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 			m_background_yPos = 0.0f;
 		}
 	}
+	if (mario_character->GetPosition().y > 370) 
+	{
+		m_screen_manager->NextScreen(SCREEN_GAMEOVER);
+	}
 	//
 	//if (Collisions::Instance()->Circle(mario_character, luigi_character))
 	//{
@@ -218,7 +222,6 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					else
 					{
 						mario_character->SetAlive(false);
-						m_screen_manager->NextScreen(SCREEN_GAMEOVER);
 						m_screen_manager->SetScore(score);
 					}
 				}

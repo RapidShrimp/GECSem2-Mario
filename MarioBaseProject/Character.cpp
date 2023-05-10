@@ -47,7 +47,7 @@ void Character::Update(float deltaTime, SDL_Event e)
 	int HeadPosition = (int)(m_position.y / TILE_HEIGHT);
 
 	//deal with gravity
-	if (m_current_level_map->GetTileAt(foot_position, centralX_position) == 0)
+	if (m_current_level_map->GetTileAt(foot_position, centralX_position) == 0 || !m_alive)
 	{
 		AddGravity(deltaTime);
 	}

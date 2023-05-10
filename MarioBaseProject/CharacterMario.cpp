@@ -94,30 +94,26 @@ void CharacterMario::Update(float deltaTime,SDL_Event e)
 
 void CharacterMario::SetAlive(bool isAlive)
 {
-	m_audio->LoadAudioFromFile("Music/Death.mp3", 0, 2);
-	if (m_audio != nullptr) { m_audio->PlayAudio(); }
 	Character::SetAlive(false);
 }
 
 void CharacterMario::Render()
 {
-	if (m_alive) 
+	//get the portion of the sprite sheet you want to draw
+	//							   {xPos, yPos, width of sprite, height of sprite}
+	SDL_Rect portion_of_sprite = { m_single_sprite_w * m_current_frame,0,m_single_sprite_w,m_single_sprite_h };
+
+	//determine where you want it drawn
+	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y) - m_single_sprite_h + 10, 32, 42 };
+
+	//then draw it facing the correct direction
+	if (m_facing_direction == FACING_RIGHT)
 	{
-		//get the portion of the sprite sheet you want to draw
-		//							   {xPos, yPos, width of sprite, height of sprite}
-		SDL_Rect portion_of_sprite = { m_single_sprite_w * m_current_frame,0,m_single_sprite_w,m_single_sprite_h };
-
-		//determine where you want it drawn
-		SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y) - m_single_sprite_h + 10, 32, 42 };
-
-		//then draw it facing the correct direction
-		if (m_facing_direction == FACING_RIGHT)
-		{
-			m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_NONE);
-		}
-		else
-		{
-			m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_HORIZONTAL);
-		}
+		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_NONE);
 	}
+	else
+	{
+		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_HORIZONTAL);
+	}
+
 }
