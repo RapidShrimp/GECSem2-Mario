@@ -40,9 +40,9 @@ void AudioComponent::PlayAudio()
 
 void AudioComponent::FreeAudio()
 {
-	//if (m_sound != nullptr) 
-	//{
-	//	delete m_sound;
-	//	m_sound = nullptr;
-	//}
+	if (m_sound != nullptr) 
+	{
+		delete m_sound;
+		m_sound = nullptr;
+	}
 }

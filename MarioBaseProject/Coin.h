@@ -4,6 +4,7 @@ class Coin : public Character
 {
 public:
 	Coin(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D start_position, FACING start_facing, float movement_speed);
+	~Coin();
 	void Jump();
 	void Update(float deltaTime, SDL_Event e) override;
 	void Render() override;

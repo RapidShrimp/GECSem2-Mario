@@ -9,6 +9,7 @@ CharacterMario::CharacterMario(SDL_Renderer* renderer, std::string imagePath, Ve
 	m_texture = new Texture2D(m_renderer);
 	m_audio = new AudioComponent(m_renderer);
 	m_audio->LoadAudioFromFile("Music/Jump.mp3", 0, 1);
+
 	if (!m_texture->LoadFromFile(imagePath))
 	{
 		cout << "Failed to Load Texture" << endl;
@@ -19,6 +20,12 @@ CharacterMario::CharacterMario(SDL_Renderer* renderer, std::string imagePath, Ve
 
 CharacterMario::~CharacterMario()
 {
+	delete m_renderer;
+	m_renderer = nullptr;
+	delete m_texture;
+	m_texture = nullptr;
+	delete m_audio;
+	m_audio = nullptr;
 }
 
 
@@ -85,23 +92,32 @@ void CharacterMario::Update(float deltaTime,SDL_Event e)
 
 }
 
+void CharacterMario::SetAlive(bool isAlive)
+{
+	m_audio->LoadAudioFromFile("Music/Death.mp3", 0, 2);
+	if (m_audio != nullptr) { m_audio->PlayAudio(); }
+	Character::SetAlive(false);
+}
+
 void CharacterMario::Render()
 {
-	//get the portion of the sprite sheet you want to draw
-	//							   {xPos, yPos, width of sprite, height of sprite}
-	SDL_Rect portion_of_sprite = { m_single_sprite_w * m_current_frame,0,m_single_sprite_w,m_single_sprite_h };
-
-	//determine where you want it drawn
-	SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y)-m_single_sprite_h+10, 32, 42};
-
-	//then draw it facing the correct direction
-	if (m_facing_direction == FACING_RIGHT)
+	if (m_alive) 
 	{
-		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_NONE);
-	}
-	else
-	{
-		m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_HORIZONTAL);
-	}
+		//get the portion of the sprite sheet you want to draw
+		//							   {xPos, yPos, width of sprite, height of sprite}
+		SDL_Rect portion_of_sprite = { m_single_sprite_w * m_current_frame,0,m_single_sprite_w,m_single_sprite_h };
 
+		//determine where you want it drawn
+		SDL_Rect destRect = { (int)(m_position.x), (int)(m_position.y) - m_single_sprite_h + 10, 32, 42 };
+
+		//then draw it facing the correct direction
+		if (m_facing_direction == FACING_RIGHT)
+		{
+			m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_NONE);
+		}
+		else
+		{
+			m_texture->Render(portion_of_sprite, destRect, SDL_FLIP_HORIZONTAL);
+		}
+	}
 }

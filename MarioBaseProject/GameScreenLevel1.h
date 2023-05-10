@@ -2,6 +2,8 @@
 #include "GameScreen.h"
 #include "Commons.h"
 #include <vector>
+#include "GameScreenManager.h"
+
 class Texture2D;
 class Character;
 class CharacterMario;
@@ -11,7 +13,7 @@ class Coin;
 class LevelMap;
 class PowBlock;
 class TextRenderer;
-class GameScreenManager;
+class AudioComponent;
 
 class GameScreenLevel1 : GameScreen
 {
@@ -26,6 +28,7 @@ public:
 	   void UpdatePOWBlock();
 private: 
 	Texture2D* m_background_texture;
+	AudioComponent* m_audio;
 	CharacterMario* mario_character;
 	CharacterLuigi* luigi_character;
 	LevelMap* m_level_map;
@@ -43,6 +46,7 @@ private:
 	void UpdateCoins(float deltaTime, SDL_Event e);
 	void CreateCoin(Vector2D position, FACING direction, float speed);
 	void CreateKoopa(Vector2D position, FACING direction, float speed);
+
 	bool m_screenshake;
 	float m_shake_time;
 	float m_wobble;

@@ -16,9 +16,13 @@ public:
 	~GameScreenManager();
 	bool m_singleplayer;
 	void Render();
+	SCREENS ActiveScreen;
+	SCREENS LoadNextScreen;
+	void NextScreen(SCREENS next_screen);
 	void Update(float deltaTime,SDL_Event e);
 	void ChangeScreen(SCREENS new_screen);
-
+	inline void SetScore(int score) { CurrentScore = score; }
+	int CurrentScore;
 
 };
 

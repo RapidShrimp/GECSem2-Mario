@@ -30,6 +30,7 @@ float Character::GetCollisionRadius()
 void Character::SetAlive(bool isAlive)
 {
 	m_alive = isAlive;
+
 }
 
 void Character::Render()
@@ -93,19 +94,25 @@ Vector2D Character::GetPosition()
 
 void Character::MoveLeft(float deltaTime)
 {
-	m_facing_direction = FACING_LEFT;
-	m_position.x -= deltaTime * MOVESPEED;
+	if (m_alive) 
+	{
+		m_facing_direction = FACING_LEFT;
+		m_position.x -= deltaTime * MOVESPEED;
+	}
 }
 
 void Character::MoveRight(float deltaTime)
 {
-	m_facing_direction = FACING_RIGHT;
-	m_position.x += deltaTime * MOVESPEED;
+	if (m_alive) 
+	{
+		m_facing_direction = FACING_RIGHT;
+		m_position.x += deltaTime * MOVESPEED;
+	}
 }
 
 void Character::Jump()
 {
-	if (m_can_jump) 
+	if (m_can_jump && m_alive) 
 	{
 		if(m_audio!=nullptr){ m_audio->PlayAudio(); }
 		

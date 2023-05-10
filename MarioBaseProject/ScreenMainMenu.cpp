@@ -16,6 +16,12 @@ ScreenMainMenu::~ScreenMainMenu()
 	m_renderer = nullptr;
 	delete m_screen_manager;
 	m_screen_manager = nullptr;
+	delete m_SingleplayerText;
+	m_SingleplayerText = nullptr;
+	delete m_MultiplayerText;
+	m_MultiplayerText = nullptr;
+	delete m_character_select;
+	m_character_select = nullptr;
 }
 
 void ScreenMainMenu::Render()
@@ -54,7 +60,7 @@ void ScreenMainMenu::Update(float deltaTime, SDL_Event e)
 		{
 		case SDLK_RETURN:
 			m_screen_manager->m_singleplayer = IsSinglePlayer;
-			m_screen_manager->ChangeScreen(SCREEN_LEVEL1);
+			m_screen_manager->NextScreen(SCREEN_LEVEL1);
 			break;
 		case SDLK_UP:
 		case SDLK_DOWN:
