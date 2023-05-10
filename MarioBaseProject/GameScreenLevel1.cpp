@@ -9,6 +9,7 @@
 #include "Coin.h"
 #include "LevelMap.h"
 #include "PowBlock.h"
+#include "AudioComponent.h"
 #include <iostream>
 
 GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer, GameScreenManager* manager, bool isSingleplayer) : GameScreen(renderer) 
@@ -50,10 +51,12 @@ bool GameScreenLevel1::SetupLevel()
 	m_pow_block = new PowBlock(m_renderer, m_level_map);
 	CreateKoopa(Vector2D(20, 30), FACING_RIGHT, KOOPA_SPEED);
 	CreateKoopa(Vector2D(456, 30), FACING_LEFT, KOOPA_SPEED);
+	m_audio = new AudioComponent();
+	m_score_text = new TextRenderer(m_renderer);
+
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 	CountdownTimer = KOOPA_RESPAWN;
-	m_score_text = new TextRenderer(m_renderer);
 	if (m_score_text)
 	{
 		m_score_text->LoadFont("Fonts/PixelFont.ttf", 20, "Score: " + to_string(score), { 255, 255, 255, 255 });
@@ -108,20 +111,6 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 			m_background_yPos = 0.0f;
 		}
 	}
-	if (mario_character->GetPosition().y > 370) 
-	{
-		m_screen_manager->NextScreen(SCREEN_GAMEOVER);
-	}
-	//
-	//if (Collisions::Instance()->Circle(mario_character, luigi_character))
-	//{
-	//	cout << "Circle hit!" << endl;
-	//}
-
-	//if (Collisions::Instance()->Box(mario_character->GetCollisionBox(),luigi_character->GetCollisionBox()))
-	//{
-	//	cout << "Box hit!" << endl;
-	//}
 
 
 	mario_character->Update(deltaTime, e);
@@ -136,6 +125,23 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 		oldScore = score;
 		m_score_text->LoadFont("Fonts/PixelFont.ttf", 20, "Score: " + to_string(score), { 255,255,255,255 });
 	}
+	if (m_singleplayer)
+	{
+		if (mario_character->GetPosition().y > 370)
+		{
+			m_audio->LoadAudioFromFile("Music/Death.mp3", 0, 1);
+			m_screen_manager->NextScreen(SCREEN_GAMEOVER);
+		}
+	}
+	else 
+	{
+		if (mario_character->GetPosition().y > 370 && luigi_character->GetPosition().y > 370) 
+		{
+			m_audio->LoadAudioFromFile("Music/Death.mp3", 0, 2);
+			m_screen_manager->NextScreen(SCREEN_GAMEOVER);
+		}
+	}
+
 }
 
 void GameScreenLevel1::RespawnTimer(float deltaTime)
@@ -221,8 +227,9 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					}
 					else
 					{
-						mario_character->SetAlive(false);
 						m_screen_manager->SetScore(score);
+						mario_character->SetAlive(false); 
+						
 					}
 				}
 				if (!m_singleplayer) 

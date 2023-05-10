@@ -4,7 +4,6 @@
 #include "GameScreenLevel1.h"
 #include "GameScreenLevel2.h"
 #include "GameScreenOver.h"
-#include "AudioComponent.h"
 
 GameScreenManager::GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen)
 {
@@ -12,7 +11,6 @@ GameScreenManager::GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen
 	m_CurrentScreen = nullptr;
 	CurrentScore = 0;
 	LoadNextScreen = startScreen;
-	m_audio = new AudioComponent(renderer);
 	ChangeScreen(startScreen);
 }
 
@@ -21,8 +19,7 @@ GameScreenManager::~GameScreenManager()
 	m_renderer = nullptr;
 	delete m_CurrentScreen;
 	m_CurrentScreen = nullptr;
-	delete m_audio;
-	m_audio = nullptr;
+
 }
 
 void GameScreenManager::Render()
@@ -68,7 +65,6 @@ void GameScreenManager::ChangeScreen(SCREENS new_screen)
 		m_CurrentScreen = (GameScreen*)new GameScreenLevel2(m_renderer,this,m_singleplayer);
 		break;
 	case SCREEN_GAMEOVER:
-		m_audio->LoadAudioFromFile("Music/Death.mp3",0,1);
 		m_CurrentScreen = (GameScreen*)new GameScreenOver(m_renderer, this, CurrentScore);
 		break;
 	case SCREEN_HIGHSCORES:

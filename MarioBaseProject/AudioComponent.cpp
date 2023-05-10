@@ -3,9 +3,8 @@
 
 
 
-AudioComponent::AudioComponent(SDL_Renderer* renderer)
+AudioComponent::AudioComponent()
 {
-	m_renderer = renderer;
 }
 
 AudioComponent::~AudioComponent()

@@ -7,7 +7,7 @@ Coin::Coin(SDL_Renderer* renderer, string imagePath, LevelMap* map, Vector2D sta
 	m_position = start_position;
 	m_single_sprite_w = m_texture->GetWidth() / 3;
 	m_single_sprite_h = m_texture->GetHeight();
-	m_audio = new AudioComponent(m_renderer);
+	m_audio = new AudioComponent();
 	
 }
 

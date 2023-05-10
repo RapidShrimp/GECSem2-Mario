@@ -5,7 +5,7 @@
 #include "Commons.h"
 
 class GameScreen;
-class AudioComponent;
+
 
 class GameScreenManager
 {
@@ -24,7 +24,7 @@ public:
 	void ChangeScreen(SCREENS new_screen);
 	inline void SetScore(int score) { CurrentScore = score; }
 	int CurrentScore;
-	AudioComponent* m_audio;
+
 
 };
 

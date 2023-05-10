@@ -12,7 +12,7 @@
 class AudioComponent
 {
 public:
-	AudioComponent(SDL_Renderer* renderer);
+	AudioComponent();
 	~AudioComponent();
 
 	bool LoadAudioFromFile(std::string path, bool looping, int Channel);
@@ -22,7 +22,6 @@ public:
 	int m_channel;
 	std::string m_audioPath;
 private:
-	SDL_Renderer* m_renderer;
 	Mix_Chunk* m_sound;
 };
 
