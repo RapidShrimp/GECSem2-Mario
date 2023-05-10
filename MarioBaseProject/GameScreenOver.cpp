@@ -53,7 +53,7 @@ void GameScreenOver::Update(float deltaTime, SDL_Event e)
 		switch (e.key.keysym.sym)
 		{
 		case SDLK_RETURN:
-			m_manager->ChangeScreen(SCREEN_MENU);
+			m_manager->NextScreen(SCREEN_MENU);
 			break;
 		}
 	}

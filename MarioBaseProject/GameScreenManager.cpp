@@ -9,7 +9,8 @@ GameScreenManager::GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen
 {
 	m_renderer = renderer;
 	m_CurrentScreen = nullptr;
-	CurrentScore = 1;
+	CurrentScore = 0;
+	LoadNextScreen = startScreen;
 	ChangeScreen(startScreen);
 }
 
@@ -25,16 +26,28 @@ void GameScreenManager::Render()
 	m_CurrentScreen->Render();
 }
 
+void GameScreenManager::NextScreen(SCREENS next_screen)
+{
+		LoadNextScreen = next_screen;
+}
+
 void GameScreenManager::Update(float deltaTime, SDL_Event e)
 {
+	if (ActiveScreen != LoadNextScreen) 
+	{
+		ActiveScreen = LoadNextScreen;
+		ChangeScreen(ActiveScreen);
+	}
 	m_CurrentScreen->Update(deltaTime, e);
 }
 
 void GameScreenManager::ChangeScreen(SCREENS new_screen)
 {
+	
 	if (m_CurrentScreen != nullptr) 
 	{
 		delete m_CurrentScreen;
+		m_CurrentScreen = nullptr;
 	}
 
 	switch (new_screen)

@@ -218,8 +218,8 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					else
 					{
 						mario_character->SetAlive(false);
-						m_screen_manager->ChangeScreen(SCREEN_GAMEOVER);
-						//m_screen_manager->SetScore(score);
+						m_screen_manager->NextScreen(SCREEN_GAMEOVER);
+						m_screen_manager->SetScore(score);
 					}
 				}
 				if (!m_singleplayer) 

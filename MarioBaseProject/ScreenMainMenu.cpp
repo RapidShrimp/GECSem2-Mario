@@ -54,7 +54,7 @@ void ScreenMainMenu::Update(float deltaTime, SDL_Event e)
 		{
 		case SDLK_RETURN:
 			m_screen_manager->m_singleplayer = IsSinglePlayer;
-			m_screen_manager->ChangeScreen(SCREEN_LEVEL1);
+			m_screen_manager->NextScreen(SCREEN_LEVEL1);
 			break;
 		case SDLK_UP:
 		case SDLK_DOWN:
