@@ -51,10 +51,10 @@ void Character::Update(float deltaTime, SDL_Event e)
 	{
 		AddGravity(deltaTime);
 	}
-	//if (m_current_level_map->GetTileAt(HeadPosition, centralX_position) == 1) 
-	//{
-	//	m_jump_force = 0;
-	//}
+	if (m_current_level_map->GetTileAt(HeadPosition, centralX_position) == 1) 
+	{
+		m_jump_force = 0;
+	}
 	else
 	{
 		//collided with ground so we can jump again
